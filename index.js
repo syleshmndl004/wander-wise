@@ -12,6 +12,7 @@ import express from 'express'; //   ES modules (modern approach)
 
 import connectDB from './config/database.js';//this imports the connectDB function from the config/database.js file, which is responsible for connecting to the MongoDB database
 
+import HANDLERS from './handlers/index.js';
 const  app = express(); // this creates an instance of the express application
 const port = process.env.PORT ;
 
@@ -30,9 +31,12 @@ const helloWorldNew = (req,res) => {
 //     res.send('Hello World'); 
 // });
 
-app.get('/',helloWorldNew); // '/' is the root route of the application, and helloWorldNew is the callback function that will be executed when a GET request is made to this route
+//app.get('/',helloWorldNew); // '/' is the root route of the application, and helloWorldNew is the callback function that will be executed when a GET request is made to this route
 
 connectDB();
+
+app.use(express.json());
+app.use("/", HANDLERS);
 
 app.listen(port,() =>{ 
     console.log(`Example app listening at http://localhost:${port}`); 
