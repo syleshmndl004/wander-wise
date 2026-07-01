@@ -26,5 +26,15 @@ const activitySchema = new Schema({
         type: String,
     },
     activities: [activitySchema],
-  });
+     date: {
+      type: Date,
+      required: true,
+    },
+  },
+  { timestamps: true }
+);
+
+const Itinerary = model("Itinerary", itinerarySchema);
+
+export default Itinerary;
     

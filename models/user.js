@@ -44,11 +44,21 @@ UserSchema.pre("save", async function () { //data save garnu aghi
 });
 
 //Ensure password is hashed on update opeartions as well
+// UserSchema.pre("findOneAndUpdate", async function () {
+//   if (this.getUpdate().password) {
+//     this.getUpdate().password = await hash(this.getUpdate().password,10);
+//   }
+// });
+//   const User = model("User", UserSchema);
+
+//   export default User;
 UserSchema.pre("findOneAndUpdate", async function () {
-  if (this.getUpdate().password) {
-    this.getUpdate().password = await hash(this.getUpdate().password,10);
+  const updatedData = this.getUpdate();
+  if (updatedData.password) {
+    updatedData.password = await hash(updatedData.password, 10);
   }
 });
-  const User = model("User", UserSchema);
 
-  export default User;
+const User = model("User", UserSchema);
+
+export default User;
