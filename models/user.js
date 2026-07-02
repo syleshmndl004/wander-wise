@@ -21,7 +21,7 @@ const UserSchema = new Schema({//yo chai method 2 ho
 
     validate: {
       validator: function (value) { //it will check if the email is valid or not using a regular expression. The regular expression checks for a valid email format, and the test method returns true if the email is valid and false otherwise.
-        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
       },
       message: "Invalid email address",
     },
