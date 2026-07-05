@@ -1,6 +1,6 @@
 @baseUrl = http://localhost:3000
 
-@userId = 6a4a49d22adcdbc00393472d
+@userId = 6a4a9bd5040657774a4467cc
 
 ### TEST API
 GET {{baseUrl}}
@@ -11,7 +11,7 @@ Content-Type: application/json
 
 {
   "name": "John Doe",
-  "email": "john.doe4@example.com",
+  "email": "john.doe8@example.com",
   "password": "test123"
 }
 
