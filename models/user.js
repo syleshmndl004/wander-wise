@@ -37,21 +37,14 @@ const UserSchema = new Schema({//yo chai method 2 ho
 }
 );
 
-UserSchema.pre("save", async function () { //data save garnu aghi 
-  if (!this.isModified("password")) {//check whether the password is modified or not if modified then hashed it 
-    this.password = await hash(this.password, 10); // Hash the password with a salt round of 10
+UserSchema.pre("save", async function () {
+  console.log("Pre-save hook triggered for user:", this);
+  if (this.isModified("password")) {
+    this.password = await hash(this.password, 10);
   }
 });
 
-//Ensure password is hashed on update opeartions as well
-// UserSchema.pre("findOneAndUpdate", async function () {
-//   if (this.getUpdate().password) {
-//     this.getUpdate().password = await hash(this.getUpdate().password,10);
-//   }
-// });
-//   const User = model("User", UserSchema);
-
-//   export default User;
+// Ensure password is hashed on update operations as well
 UserSchema.pre("findOneAndUpdate", async function () {
   const updatedData = this.getUpdate();
   if (updatedData.password) {
