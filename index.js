@@ -13,6 +13,8 @@ import express from 'express'; //   ES modules (modern approach)
 import connectDB from './config/database.js';//this imports the connectDB function from the config/database.js file, which is responsible for connecting to the MongoDB database
 
 import HANDLERS from './handlers/index.js';
+import errorMiddleware from './middlewares/error.js';
+
 const  app = express(); // this creates an instance of the express application
 const port = process.env.PORT ;
 
@@ -35,8 +37,9 @@ const helloWorldNew = (req,res) => {
 
 connectDB();
 
-app.use(express.json());
-app.use("/", HANDLERS);
+app.use(express.json());//this middleware is used to parse the incoming request body as JSON, so that we can access the data sent in the request body using req.body
+app.use("/", HANDLERS);//this middleware is used to handle all the routes defined in the handlers/index.js file
+app.use(errorMiddleware);//this middleware is used to handle errors that occur in the application
 
 app.listen(port,() =>{ 
     console.log(`Example app listening at http://localhost:${port}`); 
