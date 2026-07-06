@@ -16,8 +16,8 @@ router.post('/', async (req, res, next) => {
         const user = await create(req.body);
         res.status(201).json(user);
     } catch (error) {
-        next(error);
-    }
+        next(error);// passes the error to the next middleware, which is typically an error handler that will send an appropriate response to the client
+    } 
 });
 
 router.get('/', async (req, res, next) => {
