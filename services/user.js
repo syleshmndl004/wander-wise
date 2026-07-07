@@ -1,5 +1,6 @@
 // Service function for creating a new user
 import User from '../models/user.js';
+import { NotFoundError } from '../errors/not-found.js'; // Import the NotFoundError class from the errors/not-found.js file
 
 export const create = async (data) => { // Create a new user in the database
     const user = await User.create(data);// Create a new user in the database
@@ -13,6 +14,7 @@ export const create = async (data) => { // Create a new user in the database
 
 export const find = async (param, config) => {
     const user = await User.findOne(param, config);
+    if (!user) throw new NotFoundError('User not found');
     return user;
 }
 
