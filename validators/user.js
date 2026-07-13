@@ -1,7 +1,7 @@
 import { body } from "express-validator";
-import User from "../models/user.js";
 import { ValidationError } from "../errors/validation.js";
 import { validate } from "./validate.js";
+import User from "../models/user.js";
 /*This creates a validation middleware for creating a user. It checks that the name, 
 email, and password fields are present and meet certain criteria. If any of the validations 
 fail, it throws a ValidationError with an appropriate message.
