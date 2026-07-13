@@ -9,13 +9,12 @@ const errorMiddleware = async(err, req, res, next) => {
         success: false,
         message: err.message || "Something went wrong",
         stack: process.env.NODE_ENV !== "production" ? err.stack : null,
-        ...(err.errors?.length > 0 && {
-                errors: err.errors.map((error) => ({
+        ...(err.errors?.length > 0 && { //... meaning if errors array is not empty then only add the errors property to the response 
+                errors: err.errors.map((error) => ({ //ya errors: ko thau ma jun pani property lekhnw painx
                 field: error.path,
                 message: error.msg,
             })),
         }),
     });
 }
-
 export default errorMiddleware;

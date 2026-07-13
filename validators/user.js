@@ -22,7 +22,7 @@ export const createUserValidator = [
         .isEmail()
         .withMessage("Invalid email format")
         .trim()
-        .escape()
+        .escape()//escape is used to prevent XSS attacks by escaping special characters in the input
         .custom(async (value) => {
             const user = await User.findOne({ email: value });
             if (user) {
