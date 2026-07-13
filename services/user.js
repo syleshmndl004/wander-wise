@@ -12,7 +12,7 @@ export const create = async (data) => { // Create a new user in the database
     return users;
 }
 
-export const find = async (param, config) => {
+export const find = async (param, config) => {//find a user in the database based on the provided parameter and configuration
     const user = await User.findOne(param, config);
     if (!user) throw new NotFoundError('User not found');
     return user;
