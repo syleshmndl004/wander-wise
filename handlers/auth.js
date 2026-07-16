@@ -4,7 +4,7 @@ import { createUserValidator,loginValidator } from '../validators/user.js';
 
 const router = Router();
 
-router.post('/register', createUserValidator, async (req, res, next) => { // Handle user registration
+router.post('/register', createUserValidator, async (req, res, next) => { // Handle user registration here '/register' endpoint 
     try {
         const token = await register(req.body);
         res.status(201).json({ token });

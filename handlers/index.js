@@ -3,6 +3,7 @@ import { Router } from 'express';
 // User-related routes (see handlers/user.js)
 import USER_ROUTER from './user.js';
 import AUTH_ROUTER from './auth.js';
+import TRIP_ROUTER from './trip.js';
 
 const router = Router();
 
@@ -14,5 +15,5 @@ router.get('/', (req, res) => {
 // Mount user routes under /users
 router.use('/users', USER_ROUTER);
 router.use('/auth', AUTH_ROUTER);
-
+router.use('/trips', TRIP_ROUTER);
 export default router;

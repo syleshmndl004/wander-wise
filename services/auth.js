@@ -5,7 +5,7 @@ import {compare } from 'bcrypt'; // Importing the compare function from bcrypt f
 
 export const register = async (data) => {
     const user = await create(data);
-    return generateAccessToken({ userId: user._id });
+    return generateAccessToken({ userId: user._id }); //user._id is the unique identifier for the user in the database, which is used to generate a JWT token for authentication.
 }
 
 export const login = async (data) => {

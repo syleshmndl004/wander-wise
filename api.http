@@ -51,3 +51,18 @@ Content-Type: application/json
   "email": "jane.diie007@example.com",
   "password": "test123"
 }
+
+#### CREATE TRIP
+POST {{baseUrl}}/trips
+Content-Type: application/json  
+
+{
+  "userId": "{{userId}}",
+  "title": "Trip to Paris",
+  "startDate": "2024-07-01",
+  "endDate": "2024-07-10",
+  "budget": {
+    "total": 2000
+  },
+  "destinations": ["Paris, France"]
+}
