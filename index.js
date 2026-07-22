@@ -14,6 +14,7 @@ import connectDB from './config/database.js';//this imports the connectDB functi
 
 import HANDLERS from './handlers/index.js';
 import errorMiddleware from './middlewares/error.js';
+import {authMiddleware} from './middlewares/auth.js';
 
 const  app = express(); // this creates an instance of the express application
 const port = process.env.PORT ;
@@ -38,6 +39,7 @@ const helloWorldNew = (req,res) => {
 connectDB();
 
 app.use(express.json());//this middleware is used to parse the incoming request body as JSON, so that we can access the data sent in the request body using req.body
+app.use(authMiddleware); //this middleware is used to authenticate users
 app.use("/", HANDLERS);//this middleware is used to handle all the routes defined in the handlers/index.js file
 app.use(errorMiddleware);//this middleware is used to handle errors that occur in the application
 

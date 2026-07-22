@@ -3,3 +3,4 @@ node_modules/
 /.excalidraw
 /notes.md
 docs/
+.DS_Store

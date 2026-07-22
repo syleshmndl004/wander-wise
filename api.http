@@ -1,8 +1,7 @@
 @baseUrl = http://localhost:3000
-
  @userId = 6a54ceb92f5dae243a5d65c6
 
-### TEST API
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2YTU2MTk4NzY3ZmRjZmI5M2RkZWJkN2UiLCJpYXQiOjE3ODQ3MjAxMDUsImV4cCI6MTc4NDgwNjUwNX0.zIyPRnPDcCBD2k5JeTTQ3IrORva4mFIgpKhcBJWXPQc
 GET {{baseUrl}}
 
 ### CREATE USER
@@ -55,6 +54,7 @@ Content-Type: application/json
 #### CREATE TRIP
 POST {{baseUrl}}/trips
 Content-Type: application/json  
+Authorization: Bearer {{token}}
 
 {
   "userId": "{{userId}}",
@@ -66,3 +66,4 @@ Content-Type: application/json
   },
   "destinations": ["Paris, France"]
 }
+

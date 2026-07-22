@@ -6,7 +6,7 @@ export const generateAccessToken = async (
     const token = jwt.sign(data, process.env.JWT_SECRET_KEY, { expiresIn });
     return token;
 }
-export const verifyAccessToken = async (token) => {
+export const verifyAccessToken = (token) => {
     const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
-    return decoded?.userId ?? decoded?.tripId;
-}
+    return decoded?.userId ?? decoded?.tripId; //decoded?. means "check if the variable decoded exists before looking inside it.
+} 
