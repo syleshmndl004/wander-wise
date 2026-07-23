@@ -1,7 +1,9 @@
 @baseUrl = http://localhost:3000
- @userId = 6a54ceb92f5dae243a5d65c6
+@userId = 6a56198767fdcfb93ddebd7e
 
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2YTU2MTk4NzY3ZmRjZmI5M2RkZWJkN2UiLCJpYXQiOjE3ODQ3MjAxMDUsImV4cCI6MTc4NDgwNjUwNX0.zIyPRnPDcCBD2k5JeTTQ3IrORva4mFIgpKhcBJWXPQc
+@tripId = 6a61bbf3c6eca9bccf043650
+
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2YTU2MTk4NzY3ZmRjZmI5M2RkZWJkN2UiLCJpYXQiOjE3ODQ3OTAwODEsImV4cCI6MTc4NDg3NjQ4MX0.k6RXZb7J_nNaCZddGJyIs-fZWTJI62zT22PfIFRfeIE
 GET {{baseUrl}}
 
 ### CREATE USER
@@ -10,7 +12,7 @@ Content-Type: application/json
 
 {
   "name": "John Doae",
-  "email": "roman0090@example.com",
+  "email": "roman00000@example.com",
   "password": "test123"
 }
 
@@ -38,7 +40,7 @@ Content-Type: application/json
 
 {
   "name": "Jane Doe",
-  "email": "jane.diie007@example.com",
+  "email": "jane.dii22007@example.com",
   "password": "test123"
 }
 
@@ -57,13 +59,35 @@ Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-  "userId": "{{userId}}",
-  "title": "Trip to Paris",
+  "title": "Japan to Paris",
   "startDate": "2024-07-01",
   "endDate": "2024-07-10",
   "budget": {
     "total": 2000
   },
-  "destinations": ["Paris, France"]
+  "destinations": ["Japan, France"]
 }
 
+### GET ALL TRIPS
+GET {{baseUrl}}/trips
+Authorization: Bearer {{token}}
+
+### GET TRIP BY ID
+GET {{baseUrl}}/trips/{{tripId}}
+Authorization: Bearer {{token}}
+
+### UPDATE TRIP BY ID
+PATCH {{baseUrl}}/trips/{{tripId}}
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "title": "Updated Trip to Nepal",
+  "budget": {
+    "total": 2500
+  }
+}
+
+### DELETE TRIP BY ID
+DELETE {{baseUrl}}/trips/{{tripId}}
+Authorization: Bearer {{token}}
