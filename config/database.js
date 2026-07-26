@@ -12,3 +12,18 @@ const connectDB = async () => {
 
 //commonjs => module.exports = connectDB; // older approach to export the connectDB function
 export default connectDB; // ES modules approach to export the connectDB function
+
+/*
+callback() :  It is an instruction: "Do this chore first, 
+             and when you are finished, trigger this next action."
+             
+             ->A function passed as an argument into another function,
+               to be executed after an asynchronous operation finishes.
+
+ Callback Hell (Pyramid of Doom): Heavily nested callbacks where each subsequent 
+               asynchronous operation depends on the results of the previous one.
+                This creates deeply nested, unmaintainable code structures.     
+                
+                
+
+*/

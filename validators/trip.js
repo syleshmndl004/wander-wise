@@ -1,147 +1,124 @@
-import {body} from 'express-validator';
-import {validate} from './validate.js';
+import { body } from 'express-validator';
+import { validate } from './validate.js';
+import { ValidationError } from '../errors/validation.js';
 
 export const createTripValidator = [
-    body("title")
+  body("title")
     .trim()
     .escape()
     .notEmpty()
     .withMessage("Title is required"),
-
-    body("startDate")
+  body("startDate")
+    .trim()
+    .escape()
     .notEmpty()
     .withMessage("Start date is required")
     .isDate()
-    .withMessage("Start date must be a valid date"),
-
-    body("endDate")
+    .withMessage("Start date must be a date"),
+  body("endDate")
+    .trim()
+    .escape()
     .notEmpty()
     .withMessage("End date is required")
     .isDate()
-    .withMessage("End date must be a valid date")
+    .withMessage("End date must be a date")
     .custom((value, { req }) => {
-        if (new Date(value) < new Date(req.body.startDate)) {
-            throw new Error("End date must be after start date");
-        }
-        return true;
+      if (value < req.body.startDate) {
+        throw new ValidationError("End date must be after start date");
+      }
+      return true;
     }),
-    body("destinations")
+  body("destinations")
+    .trim()
+    .escape()
     .notEmpty()
     .withMessage("Destinations are required")
     .isArray()
     .withMessage("Destinations must be an array")
     .custom((value) => {
-        return value.every((destination) => typeof destination === "string");
+      return value.every((destination) => typeof destination === "string");
     })
     .withMessage("Destinations must be an array of strings"),
-
-    body("destinations.*")
+  body("budget.total")
     .trim()
     .escape()
     .notEmpty()
-    .withMessage("Destination cannot be empty"),
-
-    body("budget.total")
-    .notEmpty()
     .withMessage("Total budget is required")
-    .isFloat({ min: 0 })
+    .isNumeric()
     .withMessage("Total budget must be a number"),
-
-    body("budget.expenses")
+  body("budget.expenses")
     .optional()
     .isArray()
     .withMessage("Expenses must be an array"),
-
-    body("budget.expenses.*.name")
+  body("budget.expenses.*.name")
     .optional()
     .trim()
     .escape()
     .notEmpty()
     .withMessage("Expense name is required"),
-
-    body("budget.expenses.*.amount")
+  body("budget.expenses.*.amount")
     .optional()
+    .trim()
+    .escape()
     .isNumeric()
     .withMessage("Expense amount must be a number"),
-validate,
+  validate,
 ];
 
 export const updateTripValidator = [
-    body("title")
-    .optional()
-    .trim()
-    .escape()
-    .notEmpty()
-    .withMessage("Title cannot be empty"),
-
-    body("description")
+  body("title")
     .optional()
     .trim()
     .escape(),
-
-    body("startDate")
-    .optional()
-    .isDate()
-    .withMessage("Start date must be a valid date"),
-
-    body("endDate")
-    .optional()
-    .isDate()
-    .withMessage("End date must be a valid date")
-    .custom((value, { req }) => {
-        if (req.body.startDate && new Date(value) < new Date(req.body.startDate)) {
-            throw new Error("End date must be after start date");
-        }
-        return true;
-    }),
-
-    body("destinations")
-    .optional()
-    .isArray()
-    .withMessage("Destinations must be an array")
-    .custom((value) => {
-        return value.every((destination) => typeof destination === "string");
-    })
-    .withMessage("Destinations must be an array of strings"),
-
-    body("destinations.*")
+  body("startDate")
     .optional()
     .trim()
     .escape()
-    .notEmpty()
-    .withMessage("Destination cannot be empty"),
-
-    body("budget.total")
+    .isDate()
+    .withMessage("Start date must be a date"),
+  body("endDate")
     .optional()
-    .isFloat({ min: 0 })
+    .trim()
+    .escape()
+    .isDate()
+    .withMessage("End date must be a date")
+    .custom((value, { req }) => {
+      if (value < req.body.startDate) {
+        throw new ValidationError("End date must be after start date");
+      }
+      return true;
+    }),
+  body("destinations")
+    .optional()
+    .trim()
+    .escape()
+    .isArray()
+    .withMessage("Destinations must be an array")
+    .custom((value) => {
+      return value.every((destination) => typeof destination === "string");
+    })
+    .withMessage("Destinations must be an array of strings"),
+  body("budget.total")
+    .optional()
+    .trim()
+    .escape()
+    .isNumeric()
     .withMessage("Total budget must be a number"),
-
-    body("budget.spent")
-    .optional()
-    .isFloat({ min: 0 })
-    .withMessage("Spent budget must be a number"),
-
-    body("budget.expenses")
+  body("budget.expenses")
     .optional()
     .isArray()
     .withMessage("Expenses must be an array"),
-
-    body("budget.expenses.*.name")
+  body("budget.expenses.*.name")
     .optional()
     .trim()
     .escape()
     .notEmpty()
     .withMessage("Expense name is required"),
-
-    body("budget.expenses.*.amount")
+  body("budget.expenses.*.amount")
     .optional()
+    .trim()
+    .escape()
     .isNumeric()
     .withMessage("Expense amount must be a number"),
-
-    body("collaborators")
-    .optional()
-    .isArray()
-    .withMessage("Collaborators must be an array"),
-
-    validate,
+  validate,
 ];

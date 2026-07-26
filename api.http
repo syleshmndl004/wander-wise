@@ -1,9 +1,9 @@
 @baseUrl = http://localhost:3000
 @userId = 6a56198767fdcfb93ddebd7e
 
-@tripId = 6a61bbf3c6eca9bccf043650
+@tripId = 6a61bc61c6eca9bccf043652
 
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2YTU2MTk4NzY3ZmRjZmI5M2RkZWJkN2UiLCJpYXQiOjE3ODQ3OTAwODEsImV4cCI6MTc4NDg3NjQ4MX0.k6RXZb7J_nNaCZddGJyIs-fZWTJI62zT22PfIFRfeIE
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2YTU2MTk4NzY3ZmRjZmI5M2RkZWJkN2UiLCJpYXQiOjE3ODUwNjcxNzIsImV4cCI6MTc4NTE1MzU3Mn0.TGVi3DfkvXH9UZC5wDC_AI17c0CCWVNiMljUDxu6WpQ
 GET {{baseUrl}}
 
 ### CREATE USER
@@ -91,3 +91,13 @@ Authorization: Bearer {{token}}
 ### DELETE TRIP BY ID
 DELETE {{baseUrl}}/trips/{{tripId}}
 Authorization: Bearer {{token}}
+
+
+#### CREATE BAGGAGE
+POST {{baseUrl}}/trips/{{tripId}}/baggages
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "name": "Backpack"
+}

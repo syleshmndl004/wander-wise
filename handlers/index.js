@@ -4,6 +4,7 @@ import { Router } from 'express';
 import USER_ROUTER from './user.js';// bring all user related routes from user.js and mount them under /users
 import AUTH_ROUTER from './auth.js';//login, logout, register
 import TRIP_ROUTER from './trip.js';//get all trips, get trip by id, create trip, update trip, delete trip
+import BAGGAGE_ROUTER from './baggage.js';//get all baggage, get baggage by id, create baggage, update baggage, delete baggage
 
 const router = Router(); //cretate a new router instance which is empty and will be used to mount all the sub-routers for different endpoints.
 
@@ -16,6 +17,7 @@ router.get('/', (req, res) => {
 router.use('/users', USER_ROUTER);
 router.use('/auth', AUTH_ROUTER);
 router.use('/trips', TRIP_ROUTER);
+router.use('/trips/:tripId/baggages', BAGGAGE_ROUTER); // Mount baggage routes under /trips/:tripId/baggages
 export default router;
 
 
