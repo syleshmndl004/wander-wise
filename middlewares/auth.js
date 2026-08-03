@@ -1,6 +1,6 @@
 import { verifyAccessToken } from "../config/jwt.js";
 
-const publicRoutes = ["/auth/login", "/auth/register"];
+const publicRoutes = ["/auth/login", "/auth/register"];// Define an array of public routes that do not require authentication
 
 export const authMiddleware = (req, res, next) => {
   if (publicRoutes.includes(req.path)) {
