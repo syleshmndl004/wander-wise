@@ -1,4 +1,4 @@
-import transporter from './transporter';
+import transporter from '../config/mail.js';
 import path from 'path';
 import fs from 'fs';
 
@@ -9,12 +9,15 @@ const sendMail = async (to, subject, data) => {
         'accept-invite.html'
     );
     let html = fs.readFileSync(templatePath, 'utf8');
-    html = html
-        .replace('{{link}}', data.link)
-        .replace('{{title}}', data.title)
-        .replace('{{startDate}}', data.startDate)
-        .replace('{{endDate}}', data.endDate)
-        .replace('{{userName}}', data.name);
+    Object.entries({
+        link: data.link,
+        title: data.title,
+        startDate: data.startDate,
+        endDate: data.endDate,
+        userName: data.name,
+    }).forEach(([key, value]) => {
+        html = html.replace(new RegExp(`\\{\\{\\s*${key}\\s*\\}\\}`, 'g'), value);
+    });
 
     await transporter.sendMail({
         from: process.env.SMTP_USER,

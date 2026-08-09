@@ -3,7 +3,9 @@
 
 @tripId = 6a61bc61c6eca9bccf043652
 
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2YTU2MTk4NzY3ZmRjZmI5M2RkZWJkN2UiLCJpYXQiOjE3ODUwNjcxNzIsImV4cCI6MTc4NTE1MzU3Mn0.TGVi3DfkvXH9UZC5wDC_AI17c0CCWVNiMljUDxu6WpQ
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2YTU2MTk4NzY3ZmRjZmI5M2RkZWJkN2UiLCJpYXQiOjE3ODU4NDQyOTYsImV4cCI6MTc4NTkzMDY5Nn0.SQgaJAYFwXlGCFcsDOjPHpjjzb8awBTq6DOrzEG77xU
+
+@triptoken = 3DqVYeQg6pGkuRUMgw1bgvtB7OG_vspMvM7qnaxqet7JUHte
 GET {{baseUrl}}
 
 ### CREATE USER
@@ -101,3 +103,20 @@ Authorization: Bearer {{token}}
 {
   "name": "Backpack"
 }
+
+####SEND TRIP INVITATION
+POST {{baseUrl}}/trips/{{tripId}}/invite
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "collaboratorEmails": [
+    "saileshkumar9807009770@gmail.com"
+
+  ]
+}
+
+###ACCEPT TRIP INVITATION
+POST {{baseUrl}}/trips/{{tripId}}/accept
+Content-Type: application/json
+Authorization: Bearer {{triptoken}}
