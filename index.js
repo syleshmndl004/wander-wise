@@ -15,6 +15,7 @@ import connectDB from './config/database.js';//this imports the connectDB functi
 import HANDLERS from './handlers/index.js';//contains all  APIs for what to do when a customer orders something.
 import errorMiddleware from './middlewares/error.js';//safa garney a worker that clean up the mess so the website doesnot crash when an error occurs in the application
 import {authMiddleware} from './middlewares/auth.js';//a security guard that stands at the door to check if user has wristband or not (jwt token) if not then he will not let the user enter the website
+import cors from 'cors';//this is a middleware that allows cross-origin requests, so that the frontend can make requests to the backend from a different domain
 
 const  app = express(); // this tells express to start shift now as variable app is now an instance of the express application, which we can use to define routes and middleware for our application
 const port = process.env.PORT ;//address of server which is in the .env file process.env goes inside the vault to read it and get the value of PORT variable
@@ -37,6 +38,13 @@ const helloWorldNew = (req,res) => {
 //app.get('/',helloWorldNew); // '/' is the root route of the application, and helloWorldNew is the callback function that will be executed when a GET request is made to this route
 
 connectDB();
+
+app.use(cors({
+    origin: process.env.FRONTEND_URL,
+    methods: ['GET', 'POST', 'PUT', 'DELETE','PATCH'],
+    allowHeaders: ['Content-Type', 'Authorization'],
+    
+}));//this middleware is used to allow cross-origin requests
 
 app.use(express.json());//this middleware is used to parse the incoming request body as JSON, so that we can access the data sent in the request body using req.body
 app.use(authMiddleware); //Every single visitor gets frisked by the Security Guard to see if they are logged in or have a token before they proceed.
