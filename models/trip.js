@@ -82,3 +82,5 @@ TripSchema.pre("findOneAndUpdate", function () {
 const Trip = model("Trip", TripSchema);
 
 export default Trip;
+
+  

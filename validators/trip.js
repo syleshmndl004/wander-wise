@@ -13,14 +13,14 @@ export const createTripValidator = [
     .escape()
     .notEmpty()
     .withMessage("Start date is required")
-    .isDate()
+    .toDate()
     .withMessage("Start date must be a date"),
   body("endDate")
     .trim()
     .escape()
     .notEmpty()
     .withMessage("End date is required")
-    .isDate()
+    .toDate()
     .withMessage("End date must be a date")
     .custom((value, { req }) => {
       if (value < req.body.startDate) {
