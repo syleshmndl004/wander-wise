@@ -32,14 +32,7 @@ router.get('/', async (req, res, next) => {
     }
 });
 
-router.get('/:id', async (req, res, next) => {
-    try {
-        const trip = await find(req.params.id, req.user);
-        res.status(200).json(trip);
-    } catch (error) {
-        next(error);
-    }
-});
+
 
 router.patch('/:id', updateTripValidator, async (req, res, next) => {
     try {
@@ -80,6 +73,15 @@ router.get('/:id/invite/accept', async (req, res, next) => {
             );
 
         res.status(200).json(result);
+    } catch (error) {
+        next(error);
+    }
+});
+
+router.get('/:id', async (req, res, next) => {
+    try {
+        const trip = await find(req.params.id, req.user);
+        res.status(200).json(trip);
     } catch (error) {
         next(error);
     }

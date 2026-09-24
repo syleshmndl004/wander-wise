@@ -51,7 +51,7 @@ export const invite = async (id, userId, collaboratorEmails) => {
 
   const token = await generateAccessToken({ tripId: id }, '1h');
 
-  const invitationLink = `${process.env.BASE_URL}/trips/${id}/invite/accept?token=${token}`;
+  const invitationLink = `${process.env.FRONTEND_URL}/trips/${id}/invite/accept?token=${token}`;
 
   await sendEmail(collaboratorEmails.join(","), "Invitation to join a trip", {
     link: invitationLink,

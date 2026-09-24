@@ -11,7 +11,7 @@ const ExpenseSchema = new Schema({
   },
   date: {
     type: Date,
-    required: true,
+    default: Date.now,
   },
 });
 
@@ -63,21 +63,23 @@ const TripSchema = new Schema({
   ],
 });
 
-TripSchema.pre("findOneAndUpdate", function () {
-  const update = this.getUpdate();
+// TripSchema.pre("findOneAndUpdate", function () {
+//   const update = this.getUpdate();
 
-  const expenses = update?.budget?.expenses;
+//   const expenses = update?.budget?.expenses;
 
-  if (expenses?.length) {
-    update.budget.spent =
-      (update.budget.spent || 0) +
-      (expenses.reduce((acc, expense) => acc + expense.amount, 0) || 0);
+//   if (expenses?.length) {
+//     update.budget.spent =
+//       (update.budget.spent || 0) +
+//       (expenses.reduce((acc, expense) => acc + expense.amount, 0) || 0);
 
-    expenses.forEach((expense) => {
-      expense.date = new Date();
-    });
-  }
-});
+//     expenses.forEach((expense) => {
+//       expense.date = new Date();
+//     });
+//   }
+// });
+
+
 
 const Trip = model("Trip", TripSchema);
 
