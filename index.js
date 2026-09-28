@@ -19,6 +19,7 @@ import cors from 'cors';//this is a middleware that allows cross-origin requests
 
 const  app = express(); // this tells express to start shift now as variable app is now an instance of the express application, which we can use to define routes and middleware for our application
 const port = process.env.PORT ;//address of server which is in the .env file process.env goes inside the vault to read it and get the value of PORT variable
+const frontendUrl = process.env.FRONTEND_URL?.replace(/\/+$/, '');
 
 //old approach
 // function helloWorldOld(req,res){
@@ -40,9 +41,9 @@ const helloWorldNew = (req,res) => {
 connectDB();
 
 app.use(cors({
-    origin: process.env.FRONTEND_URL,
+    origin: frontendUrl,
     methods: ['GET', 'POST', 'PUT', 'DELETE','PATCH'],
-    allowHeaders: ['Content-Type', 'Authorization'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
     
 }));//this middleware is used to allow cross-origin requests
 
