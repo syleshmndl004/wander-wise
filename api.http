@@ -104,6 +104,45 @@ Authorization: Bearer {{token}}
   "name": "Backpack"
 }
 
+#### CREATE ITINERARY
+POST {{baseUrl}}/trips/{{tripId}}/itineraries
+Content-Type: application/json
+Authorization: ******
+
+{
+  "title": "Day 1 in Paris",
+  "description": "Arrival and sightseeing",
+  "date": "2024-07-01",
+  "activities": [
+    {
+      "name": "Visit the Eiffel Tower",
+      "time": "2024-07-01T14:00:00.000Z",
+      "notes": ["Book tickets in advance"]
+    }
+  ]
+}
+
+### GET ALL ITINERARIES
+GET {{baseUrl}}/trips/{{tripId}}/itineraries
+Authorization: ******
+
+### GET ITINERARY BY ID
+GET {{baseUrl}}/trips/{{tripId}}/itineraries/{{itineraryId}}
+Authorization: ******
+
+### UPDATE ITINERARY BY ID
+PATCH {{baseUrl}}/trips/{{tripId}}/itineraries/{{itineraryId}}
+Content-Type: application/json
+Authorization: ******
+
+{
+  "title": "Updated Day 1 in Paris"
+}
+
+### DELETE ITINERARY BY ID
+DELETE {{baseUrl}}/trips/{{tripId}}/itineraries/{{itineraryId}}
+Authorization: ******
+
 ####SEND TRIP INVITATION
 POST {{baseUrl}}/trips/{{tripId}}/invite
 Content-Type: application/json
